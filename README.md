@@ -1,0 +1,2 @@
+# alokya
+Alokya Ayurveda
