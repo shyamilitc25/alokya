@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import Footer from "./footer";
 import Header from "./header";
 import BG from "./assets/b1.jpg";
-import BookNowModal from "./booknow";
+import BookNowModal from "./BookNowModal";
 const PortFolio = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => setModalIsOpen(true);
