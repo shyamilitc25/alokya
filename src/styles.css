@@ -2848,9 +2848,9 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #1abc9c;
-  --bs-btn-border-color: #1abc9c;
-  --bs-btn-hover-color: #fff;
+  --bs-btn-bg: #f5b393;
+  --bs-btn-border-color: #f5b393;
+  --bs-btn-hover-color: #f5b393;
   --bs-btn-hover-bg: #16a085;
   --bs-btn-hover-border-color: #15967d;
   --bs-btn-focus-shadow-rgb: 60, 198, 171;
@@ -10972,6 +10972,7 @@ html {
 .masthead {
   padding-top: calc(6rem + 74px);
   padding-bottom: 6rem;
+  background-image: url("./assets/b2.jpg");
 }
 .masthead .masthead-heading {
   font-size: 2.75rem;
@@ -11045,4 +11046,15 @@ html {
 
 .copyright {
   background-color: #1a252f;
+}
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border-radius: 10px; /* Rounded corners */
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.card-text {
+  color: #555;
 }

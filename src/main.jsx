@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import Header from "./header";
 import KnowMore from "./knowmore";
 import "./styles.css";
+import PortFolio from "./portfolio";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -12,6 +13,7 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/knowmore" element={<KnowMore />} />
+        <Route path="/portfolio" element={<PortFolio />} />
       </Routes>
     </Router>
     ;

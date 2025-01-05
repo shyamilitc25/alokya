@@ -25,14 +25,6 @@ const Navigation = () => {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item mx-0 mx-lg-1">
-                <a
-                  className="nav-link py-3 px-0 px-lg-3 rounded"
-                  href="#portfolio"
-                >
-                  Portfolio
-                </a>
-              </li>
-              <li className="nav-item mx-0 mx-lg-1">
                 <a className="nav-link py-3 px-0 px-lg-3 rounded" href="#about">
                   About
                 </a>
@@ -40,11 +32,20 @@ const Navigation = () => {
               <li className="nav-item mx-0 mx-lg-1">
                 <a
                   className="nav-link py-3 px-0 px-lg-3 rounded"
-                  href="#contact"
+                  href="/portfolio"
                 >
-                  Contact
+                  Portfolio
                 </a>
               </li>
+
+              {/* <li className="nav-item mx-0 mx-lg-1">
+                <a
+                  className="nav-link py-3 px-0 px-lg-3 rounded"
+                  href="#contact"
+                >
+                  Book Now
+                </a>
+              </li> */}
               <li className="nav-item mx-0 mx-lg-1">
                 <a
                   className="nav-link py-3 px-0 px-lg-3 rounded"

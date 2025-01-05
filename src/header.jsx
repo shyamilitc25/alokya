@@ -1,11 +1,11 @@
-import Logo from "./assets/logo.png";
+import Logo from "./assets/b1.jpg";
 function Header() {
   return (
     <>
       <header className="masthead bg-primary text-white text-center">
         <div className="container d-flex align-items-center flex-column">
           {/* <!-- Masthead Avatar Image--> */}
-          <img className="masthead-avatar mb-5" src={Logo} alt="..." />
+          {/* <img className="masthead-avatar mb-5" src={Logo} alt="..." /> */}
           {/* <!-- Masthead Heading--> */}
           <h1 className="masthead-heading text-uppercase mb-0">
             Aleyka Ayurveda

@@ -9,46 +9,11 @@ function App() {
         <Navigation />
         <Header />
 
-        <section className="page-section portfolio" id="portfolio">
-          {" "}
-          <div className="container">
-            {/* <!-- Portfolio Section Heading--> */}
-            <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
-              Portfolio
-            </h2>
-            {/* <!-- Icon Divider--> */}
-            <div className="divider-custom">
-              <div className="divider-custom-line"></div>
-              <div className="divider-custom-icon">
-                <i className="fas fa-star"></i>
-              </div>
-              <div className="divider-custom-line"></div>
-            </div>
-            {/* <!-- Portfolio Grid Items--> */}
-            <div className="row justify-content-center">
-              {/* <!-- Portfolio Item 1--> */}
-              <div className="col-md-6 col-lg-12 mb-5">
-                <div
-                  className="portfolio-item mx-auto"
-                  data-bs-toggle="modal"
-                  data-bs-target="#portfolioModal1"
-                >
-                  <div className="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                    <div className="portfolio-item-caption-content text-center text-white">
-                      <i className="fas fa-plus fa-3x"></i>
-                    </div>
-                  </div>
-                  <img className="img-fluid" src={TherapyDetails} alt="..." />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
         {/* <!-- About Section--> */}
-        <section className="page-section bg-primary text-white mb-0" id="about">
+        <section className="page-section portfolio" id="about">
           <div className="container">
             {/* <!-- About Section Heading--> */}
-            <h2 className="page-section-heading text-center text-uppercase text-white">
+            <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
               About
             </h2>
             {/* <!-- Icon Divider--> */}
@@ -81,13 +46,13 @@ function App() {
           </div>
         </section>
         {/* <!-- Contact Section--> */}
-        <section className="page-section" id="contact">
+        {/* <section className="page-section" id="contact">
           <div className="container">
-            {/* <!-- Contact Section Heading--> */}
+        
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
               Contact Me
             </h2>
-            {/* <!-- Icon Divider--> */}
+           
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
               <div className="divider-custom-icon">
@@ -95,7 +60,7 @@ function App() {
               </div>
               <div className="divider-custom-line"></div>
             </div>
-            {/* <!-- Contact Section Form--> */}
+            
             <div className="row justify-content-center">
               <div className="col-lg-8 col-xl-7">
                 <form id="contactForm" data-sb-form-api-token="API_TOKEN">
@@ -116,7 +81,7 @@ function App() {
                       A name is required.
                     </div>
                   </div>
-                  {/* <!-- Email address input--> */}
+                 
                   <div className="form-floating mb-3">
                     <input
                       className="form-control is-invalid"
@@ -140,7 +105,7 @@ function App() {
                       Email is not valid.
                     </div>
                   </div>
-                  {/* <!-- Phone number input--> */}
+                
                   <div className="form-floating mb-3">
                     <input
                       className="form-control"
@@ -158,7 +123,7 @@ function App() {
                       A phone number is required.
                     </div>
                   </div>
-                  {/* <!-- Message input--> */}
+                
                   <div className="form-floating mb-3">
                     <input
                       className="form-control"
@@ -208,7 +173,7 @@ function App() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <Footer />
         {/* <!-- Copyright Section--> */}
