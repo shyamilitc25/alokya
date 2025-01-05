@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./styles.css";
 import App from "./App.jsx";
 import Header from "./header";
-import KnowMore from "./KnowMore.jsx";
+import KnowMore from "./KnowMore";
 import PortFolio from "./PortFolio";
 
 createRoot(document.getElementById("root")).render(
