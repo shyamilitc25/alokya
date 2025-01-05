@@ -1,4 +1,3 @@
-import Navigation from "./Navigation";
 import Footer from "./footer";
 import Header from "./header";
 const KnowMore = () => {
@@ -13,6 +12,7 @@ const KnowMore = () => {
             <a className="navbar-brand" href="#page-top">
               Aleyka Ayurveda
             </a>
+
             <button
               className="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
               type="button"
