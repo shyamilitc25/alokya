@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./styles.css";
 import App from "./App.jsx";
 import Header from "./header";
-import Portfolio from "./PortFolio.jsx"; // Correct file reference
 import KnowMore from "./KnowMore.jsx";
+import PortFolio from "./PortFolio";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/knowmore" element={<KnowMore />} />
-        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio" element={<PortFolio />} />
       </Routes>
     </Router>
     ;
