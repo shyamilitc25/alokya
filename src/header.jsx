@@ -1,4 +1,3 @@
-import Logo from "./assets/b1.jpg";
 function Header() {
   return (
     <>
@@ -7,9 +6,7 @@ function Header() {
           {/* <!-- Masthead Avatar Image--> */}
           {/* <img className="masthead-avatar mb-5" src={Logo} alt="..." /> */}
           {/* <!-- Masthead Heading--> */}
-          <h1 className="masthead-heading text-uppercase mb-0">
-            Aleyka Ayurveda
-          </h1>
+          <h1 className="masthead-heading text-uppercase mb-0">Aleyka</h1>
           {/* <!-- Icon Divider--> */}
           <div className="divider-custom divider-light">
             <div className="divider-custom-line"></div>
@@ -20,7 +17,7 @@ function Header() {
           </div>
           {/* <!-- Masthead Subheading--> */}
           <p className="masthead-subheading font-weight-light mb-0">
-            some small desc
+            Ayurveda Studio
           </p>
         </div>
       </header>

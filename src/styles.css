@@ -10970,9 +10970,12 @@ html {
 }
 
 .masthead {
-  padding-top: calc(6rem + 74px);
-  padding-bottom: 6rem;
-  background-image: url("./assets/b2.jpg");
+  padding-top: calc(9rem + 74px);
+  padding-bottom: 9rem;
+  background-image: url("./assets/banner.jpg");
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; 
 }
 .masthead .masthead-heading {
   font-size: 2.75rem;
@@ -11058,3 +11061,20 @@ html {
 .card-text {
   color: #555;
 }
+
+.card-img-top{
+  height: 400px;
+  object-fit: fill;
+}
+.consultation-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 1rem; /* Add spacing between the image and text */
+}
+
+.consultation-img {
+  max-width: 40%; /* Adjust width of the image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: Add rounded corners */
+}
+

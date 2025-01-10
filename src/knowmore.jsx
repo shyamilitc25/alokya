@@ -1,5 +1,6 @@
 import Footer from "./footer";
 import Header from "./header";
+import Consultation from "./assets/consultation_with_specialist.jpg";
 const KnowMore = () => {
   return (
     <>
@@ -41,7 +42,7 @@ const KnowMore = () => {
           {" "}
           <div className="container">
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
-              Ayurveda Consultation-
+              Ayurveda-Beratung mit Akhil Sugathan Amrutha
             </h2>
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
@@ -52,20 +53,35 @@ const KnowMore = () => {
             </div>
             <div className="row">
               <div className="col-lg-12 ms-auto">
-                <p className="lead">
-                  Bei Aleyka Ayurveda finden Sie die verjüngende Kraft der
-                  ganzheitlichen Tradition. Wir bieten Ihnen authentische
-                  ayurvedische Beratungen und Massagen. In einer ruhigen
-                  Umgebung bietet Aleyka Ayurveda einen Ort, an dem man sich
-                  wohlfühlen kann. Hier trifft Tradition auf Moderne. Jeder
-                  Therapeut bei Aleyka Ayurveda ist ausgebildet in der alten
-                  Kunst des Ayurveda. So kann er Ihnen genau die Massage und
-                  Beratung geben, die Sie brauchen. Wir bieten Ihnen viele
-                  verschiedene Behandlungen an, damit Sie sich wohlfühlen. Egal,
-                  ob Sie Stress abbauen, Entspannung suchen oder etwas für Ihre
-                  Gesundheit tun möchten. Ayurveda ist eine gute Möglichkeit, um
-                  wieder neue Kraft zu tanken.
-                </p>
+                <div className="consultation-container">
+                  <img
+                    src={Consultation}
+                    className="consultation-img"
+                    alt="Consultation"
+                  />
+                  <p className="lead">
+                    Akhil Sugathan Amrutha ist ein AyurvedaSpezialist aus
+                    Indien. Er hat seinen BachelorAbschluss in Ayurveda an der
+                    Universität Goa in Indien gemacht. Seit 2016 hat er in
+                    verschiedenen ayurvedabezogenen Funktionen in Deutschland
+                    gearbeitet. Seit 2021 ist er als Ayurveda-Spezialist im
+                    AyurvedaZentrum Bad Berleburg tätig
+                    <br />
+                    <br />
+                    {/* </p>
+                  <p className="lead"> */}
+                    In der 90-minütigen Konsultation wird Herr Amrutha Ihre
+                    Prakruti (Konstitution) und den Grad des
+                    Dosha-Ungleichgewichts (Vata, Pitta, Kapha) im Körper
+                    bestimmen. Anschließend wird er spezifische Änderungen
+                    empfehlen, die Sie umsetzen können, einschließlich
+                    Ernährungsänderungen, Yogaübungen und Pranayama
+                  </p>
+                </div>
+                {/* <p className="lead">
+                  * Bitte beachten Sie, dass diese Konsultation keinen Arzt oder
+                  Heilpraktiker ersetzt
+                </p> */}
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Header from "./header";
 import KnowMore from "./Knowmore";
 import PortFolio from "./Portfolio";
+// import AdminApp from "../admin/src/App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<App />} />
         <Route path="/knowmore" element={<KnowMore />} />
         <Route path="/portfolio" element={<PortFolio />} />
+        {/* <Route path="/admin" element={<AdminApp />} /> */}
       </Routes>
     </Router>
     ;
