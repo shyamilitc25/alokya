@@ -1,6 +1,7 @@
 import Footer from "./footer";
 import Header from "./header";
 import Consultation from "./assets/consultation_with_specialist.jpg";
+import Logo from "./assets/logo.png";
 const KnowMore = () => {
   return (
     <>
@@ -10,6 +11,12 @@ const KnowMore = () => {
           id="mainNav"
         >
           <div className="container">
+            <img
+              className="masthead-logo me-3"
+              src={Logo} // Replace `Logo` with your image path or import
+              alt="Logo"
+              style={{ width: "50px", height: "50px" }} // Adjust size as needed
+            />
             <a className="navbar-brand" href="#page-top">
               Aleyka Ayurveda
             </a>

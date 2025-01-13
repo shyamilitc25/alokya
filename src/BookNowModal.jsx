@@ -87,26 +87,17 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
               />
             </div>
 
-            <div className="mb-3 d-flex align-items-center">
-              <div className="me-3 flex-fill">
-                <label className="form-label">Date</label>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="datePicker">
+                Date
+              </label>
+              <div>
                 <DatePicker
+                  id="datePicker"
                   selected={formData.date}
                   onChange={handleDateChange}
                   className="form-control"
                   dateFormat="yyyy-MM-dd"
-                />
-              </div>
-
-              <div className="flex-fill">
-                <label className="form-label">Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleInputChange}
-                  required
                 />
               </div>
             </div>

@@ -11063,8 +11063,8 @@ html {
 }
 
 .card-img-top{
-  height: 400px;
-  object-fit: fill;
+  height: 200px;
+  object-fit: cover;
 }
 .consultation-container {
   display: flex;
@@ -11077,4 +11077,6 @@ html {
   height: auto; /* Maintain aspect ratio */
   border-radius: 8px; /* Optional: Add rounded corners */
 }
-
+.react-datepicker-wrapper{
+  width: 100% !important;
+}

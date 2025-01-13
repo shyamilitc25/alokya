@@ -3,10 +3,14 @@ function Header() {
     <>
       <header className="masthead bg-primary text-white text-center">
         <div className="container d-flex align-items-center flex-column">
-          {/* <!-- Masthead Avatar Image--> */}
-          {/* <img className="masthead-avatar mb-5" src={Logo} alt="..." /> */}
-          {/* <!-- Masthead Heading--> */}
-          <h1 className="masthead-heading text-uppercase mb-0">Aleyka</h1>
+          {/* <!-- Heading and Logo Row --> */}
+          <div className="d-flex align-items-center justify-content-center mb-3">
+            {/* Logo */}
+
+            {/* Heading */}
+            <h1 className="masthead-heading text-uppercase mb-0">Aleyka</h1>
+          </div>
+
           {/* <!-- Icon Divider--> */}
           <div className="divider-custom divider-light">
             <div className="divider-custom-line"></div>
@@ -15,12 +19,14 @@ function Header() {
             </div>
             <div className="divider-custom-line"></div>
           </div>
-          {/* <!-- Masthead Subheading--> */}
+
+          {/* <!-- Subheading --> */}
           <p className="masthead-subheading font-weight-light mb-0">
             Ayurveda Studio
           </p>
         </div>
       </header>
+
       {/* <head>
         <meta charset="utf-8" />
         <meta
