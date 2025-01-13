@@ -25,6 +25,11 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
     console.log("Submitted Data:", formData);
     closeModal();
   };
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+
+  const handleTimeSlotChange = (timeSlot) => {
+    setSelectedTimeSlot(timeSlot);
+  };
 
   return (
     <>
@@ -99,6 +104,158 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
                   className="form-control"
                   dateFormat="yyyy-MM-dd"
                 />
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              <label className="form-label" htmlFor="datePicker">
+                Select a slot
+              </label>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "9:00 AM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("9:00 AM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">9:00 AM</h5>
+                  </div>
+                </label>
+              </div>
+
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "10:00 AM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("10:00 AM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">10:00 AM</h5>
+                  </div>
+                </label>
+              </div>
+
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "11:00 AM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("11:00 AM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">11:00 AM</h5>
+                  </div>
+                </label>
+              </div>
+
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
+              </div>
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotChange("12:00 PM")}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">12:00 PM</h5>
+                  </div>
+                </label>
               </div>
             </div>
 

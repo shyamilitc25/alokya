@@ -1,4 +1,4 @@
-import TherapyDetails from "./assets/therapy.png";
+import Logo from "./assets/logo_cropped.png";
 import Footer from "./footer";
 import Header from "./header";
 import Navigation from "./Navigation";
@@ -16,7 +16,7 @@ function App() {
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
               About
             </h2>
-            {/* <!-- Icon Divider--> */}
+
             <div className="divider-custom divider-light">
               <div className="divider-custom-line"></div>
               <div className="divider-custom-icon">
@@ -26,6 +26,9 @@ function App() {
             </div>
             {/* <!-- About Section Content--> */}
             <div className="row">
+              <div className="ol-lg-12 ms-auto d-flex justify-content-center align-items-center">
+                <img src={Logo} alt="Logo" />
+              </div>
               <div className="col-lg-12 ms-auto">
                 <p className="lead">
                   Bei Aleyka Ayurveda finden Sie die verjüngende Kraft der
