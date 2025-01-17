@@ -11107,3 +11107,20 @@ html {
   padding-left: 5px;   /* Set your preferred padding */
   padding-bottom: 0
 }
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ReactModal__Content {
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto; /* Enable scrolling */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+

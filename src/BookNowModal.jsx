@@ -39,7 +39,11 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
           onRequestClose={closeModal}
           contentLabel="Form Modal"
           ariaHideApp={false}
+          shouldCloseOnOverlayClick={true} // Enables closing on overlay click
           style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // Dimmed background
+            },
             content: {
               top: "50%",
               left: "50%",
@@ -50,7 +54,10 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
               padding: "20px",
               borderRadius: "10px",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              width: "700px",
+              width: "90%", // Adjust for smaller screens
+              maxWidth: "700px",
+              // height: "90vh", // Limit height for scroll
+              overflowY: "auto", // Enable sc,
             },
           }}
         >
