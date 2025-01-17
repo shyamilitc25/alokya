@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-const BookNowModal = ({ modalIsOpen, closeModal }) => {
+import { useSupabase } from "./SupabaseContext";
+const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
+  const [timeSlots, setTimeSlots] = useState([]);
+  const supabase = useSupabase();
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -11,18 +14,96 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
     time: "",
   });
 
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      const { data, error } = await supabase.from("slots").select("*");
+
+      if (error) {
+        console.error("Error fetching time slots:", error.message);
+      } else {
+        setTimeSlots(data);
+      }
+    };
+
+    fetchTimeSlots();
+  }, [massageId]);
+  console.log({ timeSlots });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "contact") {
+      if (!value.startsWith("+49") && !value.startsWith("0")) {
+        alert("Please enter a valid contact number.");
+        return;
+      }
+
+      const sanitizedValue = value.replace(/(?!^\+)[^\d]/g, "");
+      if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
+        alert("Please enter a valid contact number.");
+        return;
+      }
+    }
+
+    if (name === "email") {
+      // Email regex validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+
+  // setFormData({ ...formData, [name]: value });
 
   const handleDateChange = (date) => {
     setFormData({ ...formData, date });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitted Data:", formData);
+    const { name, contact, email, date } = formData;
+    console.log({ formData });
+
+    try {
+      const { data, error } = await supabase
+        .from("bookings") // Replace with your table name
+        .insert([
+          {
+            client_name: name,
+            client_mob: contact,
+            client_email: email,
+            booking_date: date.toISOString(), // Convert date to ISO string
+            // time: time,
+            massage_id: massageId,
+          },
+        ]);
+
+      if (error) {
+        console.error("Error inserting data:", error.message);
+        alert("Failed to schedule appointment. Please try again.");
+      } else {
+        console.log("Data inserted successfully:", data);
+        alert("Appointment scheduled successfully!");
+        setFormData({
+          name: "",
+          contact: "",
+          email: "",
+          date: new Date(),
+          time: "",
+        });
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred. Please try again.");
+    }
     closeModal();
   };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -81,7 +162,7 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
                 type="tel"
                 className="form-control"
                 name="contact"
-                value={formData.contact}
+                value={formData.contact || "+49"}
                 onChange={handleInputChange}
                 required
               />
@@ -110,6 +191,7 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
                   onChange={handleDateChange}
                   className="form-control"
                   dateFormat="yyyy-MM-dd"
+                  name="date"
                 />
               </div>
             </div>
@@ -117,153 +199,20 @@ const BookNowModal = ({ modalIsOpen, closeModal }) => {
               <label className="form-label" htmlFor="datePicker">
                 Select a slot
               </label>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "9:00 AM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("9:00 AM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">9:00 AM</h5>
-                  </div>
-                </label>
-              </div>
-
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "10:00 AM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("10:00 AM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">10:00 AM</h5>
-                  </div>
-                </label>
-              </div>
-
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "11:00 AM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("11:00 AM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">11:00 AM</h5>
-                  </div>
-                </label>
-              </div>
-
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlot === "12:00 PM" ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotChange("12:00 PM")}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">12:00 PM</h5>
-                  </div>
-                </label>
-              </div>
+              {timeSlots.map((slot) => (
+                <div className="col-md-2 mb-4">
+                  <label
+                    className={`card time_card h-100 border-light shadow-sm ${
+                      selectedTimeSlot === slot?.id ? "selected-card" : ""
+                    }`}
+                    onClick={() => handleTimeSlotChange(slot?.id)}
+                  >
+                    <div className="card-body text-center">
+                      <h5 className="card-title">{slot?.slots}</h5>
+                    </div>
+                  </label>
+                </div>
+              ))}
             </div>
 
             <div className="text-center">

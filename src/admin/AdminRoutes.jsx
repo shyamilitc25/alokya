@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard"; // Admin dashboard component
 // import Appoinments from "./Appoinments";
 import Appoinments from "./Appoinments";
 import Login from "./Login";
+import TimeSlot from "./TimeSlot";
 import ProtectedRoute from "./ProtectedRoute";
 
 // import Appointments from "./Appointments"; // Admin appointments component
@@ -28,6 +29,8 @@ const AdminRoutes = () => {
       />
 
       <Route path="appoinments" element={<Appoinments />} />
+      <Route path="timeslot" element={<TimeSlot />} />
+
       {/* Add more admin-specific routes here */}
     </Routes>
   );

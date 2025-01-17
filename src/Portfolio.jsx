@@ -1,17 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "./Navigation";
 import Footer from "./footer";
 import Header from "./header";
-import Massage1 from "./assets/massage_1.jpg";
-import Massage2 from "./assets/massage_2.jpg";
-import Massage3 from "./assets/massage_3.jpg";
-import Massage4 from "./assets/massage_4.jpg";
 import BookNowModal from "./BookNowModal";
 import Logo from "./assets/logo.png";
+import { useSupabase } from "./SupabaseContext";
 const PortFolio = () => {
+  const [massages, setMassages] = useState([]);
+  const supabase = useSupabase();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
+  const closeModal = () => {
+    setSelectedMassageId(null);
+    setModalIsOpen(false);
+  };
+  const [selectedMassageId, setSelectedMassageId] = useState(null);
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      const { data, error } = await supabase
+        .from("massages")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching time slots:", error.message);
+      } else {
+        setMassages(data);
+      }
+    };
+
+    fetchTimeSlots();
+  }, []);
+  console.log({ massages });
   return (
     <>
       <body id="page-top">
@@ -66,102 +86,34 @@ const PortFolio = () => {
               <div className="divider-custom-line"></div>
             </div>
             <div className="row justify-content-center">
-              <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
-                <div className="card h-100 mx-auto" style={{ width: "100%" }}>
-                  <img
-                    className="card-img-top img-fluid"
-                    src={Massage1}
-                    alt="Portfolio Item"
-                  />
-                  <div className="card-body text-center d-flex flex-column">
-                    <h5 className="card-title">Massage 1</h5>
-                    <p className="card-text">40 minuten Abyanga €69</p>
-                    <button
-                      className="btn btn-primary mt-auto"
-                      data-bs-toggle="modal"
-                      data-bs-target="#portfolioModal6"
-                      onClick={() => openModal(true)}
-                    >
-                      Book Now
-                    </button>
+              {massages?.map((massage) => (
+                <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
+                  <div className="card h-100 mx-auto" style={{ width: "100%" }}>
+                    <img
+                      className="card-img-top img-fluid"
+                      src={massage?.img_url}
+                      alt="Portfolio Item"
+                    />
+                    <div className="card-body text-center d-flex flex-column">
+                      <h5 className="card-title">{massage?.massage_name}</h5>
+                      <p className="card-text">
+                        {massage?.massage_desc} - €{massage?.price}
+                      </p>
+                      <button
+                        className="btn btn-primary mt-auto"
+                        data-bs-toggle="modal"
+                        data-bs-target="#portfolioModal6"
+                        onClick={() => {
+                          setSelectedMassageId(massage.id);
+                          openModal(true);
+                        }}
+                      >
+                        Book Now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
-                <div className="card h-100 mx-auto" style={{ width: "100%" }}>
-                  <img
-                    className="card-img-top img-fluid"
-                    src={Massage2}
-                    alt="Portfolio Item"
-                  />
-                  <div className="card-body text-center d-flex flex-column">
-                    <h5 className="card-title">Massage 2</h5>
-                    <p className="card-text">
-                      Massage 2(40 minuten Abyanga + 20 minuten Padaabyanga) -
-                      €89
-                    </p>
-                    <button
-                      className="btn btn-primary mt-auto"
-                      data-bs-toggle="modal"
-                      data-bs-target="#portfolioModal6"
-                      onClick={() => openModal(true)}
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
-                <div className="card h-100 mx-auto" style={{ width: "100%" }}>
-                  <img
-                    className="card-img-top img-fluid"
-                    src={Massage3}
-                    alt="Portfolio Item"
-                  />
-                  <div className="card-body text-center d-flex flex-column">
-                    <h5 className="card-title">Massage 3</h5>
-                    <p className="card-text">
-                      Massage 3(40 minuten Abyanga + 30 minuten Padaabyanga + 20
-                      minuten Mukhaabyanga) - €129
-                    </p>
-                    <button
-                      className="btn btn-primary mt-auto"
-                      data-bs-toggle="modal"
-                      data-bs-target="#portfolioModal6"
-                      onClick={() => openModal(true)}
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
-                <div className="card h-100 mx-auto" style={{ width: "100%" }}>
-                  <img
-                    className="card-img-top img-fluid"
-                    src={Massage4}
-                    alt="Portfolio Item"
-                  />
-                  <div className="card-body text-center d-flex flex-column">
-                    <h5 className="card-title">Massage 4</h5>
-                    <p className="card-text">
-                      Massage 4(40 minuten Abyanga + 30 min Padabyanga + 30 min
-                      Mukhaabyanga + 20 min Shiroabyanga) - €169
-                    </p>
-                    <button
-                      className="btn btn-primary mt-auto"
-                      data-bs-toggle="modal"
-                      data-bs-target="#portfolioModal6"
-                      onClick={() => openModal(true)}
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <br />
@@ -169,7 +121,11 @@ const PortFolio = () => {
           <br />
         </section>
         <Footer />
-        <BookNowModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+        <BookNowModal
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          massageId={selectedMassageId}
+        />
       </body>
     </>
   );

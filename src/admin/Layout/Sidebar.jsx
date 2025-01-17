@@ -19,6 +19,11 @@ const AdminSidebar = () => {
             Appoinments
           </a>
         </li>
+        <li className="nav-item mb-2">
+          <a className="nav-link text-white" href="/admin/timeslot">
+            Mark Time Slot
+          </a>
+        </li>
       </ul>
     </div>
   );

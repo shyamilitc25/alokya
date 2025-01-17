@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AdminLayout from "./Layout/AdminLayout";
 import "./style.css";
 import { Table, Button } from "react-bootstrap";
+import { useSupabase } from "../SupabaseContext";
 // import { Button } from "bootstrap";
 const Appoinments = () => {
+  const supabase = useSupabase();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      // setLoading(true);
+      const { data, error } = await supabase.from("massages").select("*");
+
+      if (error) {
+        console.log(error.message);
+      } else {
+        setData(data);
+      }
+      // setLoading(false);
+    };
+
+    fetchData();
+  }, [supabase]);
   const users = [
     {
       id: 1,
