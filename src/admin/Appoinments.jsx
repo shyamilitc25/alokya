@@ -10,7 +10,15 @@ const Appoinments = () => {
   useEffect(() => {
     const fetchData = async () => {
       // setLoading(true);
-      const { data, error } = await supabase.from("massages").select("*");
+
+      const { data, error } = await supabase.from("bookings").select(`
+    id, 
+    client_name, 
+    client_email, 
+    booking_date, 
+    client_mob, 
+    massage:id, massage_name
+  `);
 
       if (error) {
         console.log(error.message);
@@ -22,56 +30,7 @@ const Appoinments = () => {
 
     fetchData();
   }, [supabase]);
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-    {
-      id: 4,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-    {
-      id: 5,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-    {
-      id: 6,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      contact: "1234567890",
-      date: "25-01-2025",
-      time: "10:00 PM",
-    },
-  ];
+
   return (
     <AdminLayout>
       <h1>Appoinments</h1>
@@ -88,14 +47,14 @@ const Appoinments = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {data.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.date}</td>
-              <td>{user.time}</td>
-              <td>{user.contact}</td>
+              <td>{user.client_name}</td>
+              <td>{user.client_email}</td>
+              <td>{user.booking_date}</td>
+              <td>{"Time to be implemented"}</td>
+              <td>{user.client_mob}</td>
               <td>
                 <Button>Approve</Button>
               </td>
