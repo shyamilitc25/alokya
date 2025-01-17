@@ -17,7 +17,7 @@ const Appoinments = () => {
     client_email, 
     booking_date, 
     client_mob, 
-    massage:id, massage_name
+    massages(id, massage_name)
   `);
 
       if (error) {
