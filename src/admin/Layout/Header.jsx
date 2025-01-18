@@ -1,6 +1,18 @@
 import React from "react";
-
+import { useSupabase } from "../../SupabaseContext";
+import { useNavigate } from "react-router-dom";
 const AdminHeader = () => {
+  const navigate = useNavigate();
+  const supabase = useSupabase();
+  async function signOut() {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error signing out:", error.message);
+    } else {
+      navigate("/admin/login");
+      console.log("User signed out successfully");
+    }
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -28,9 +40,13 @@ const AdminHeader = () => {
               </a>
             </li> */}
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <button
+                className="nav-link"
+                style={{ backgroundColor: "transparent", color: "#fff" }}
+                onClick={() => signOut()}
+              >
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>

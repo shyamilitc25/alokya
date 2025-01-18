@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSupabase } from "../SupabaseContext";
 const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
+  const supabase = useSupabase();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -11,10 +13,39 @@ const Login = ({ setIsAuthenticated }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  // async function handleSubmit=(e)=> {
+  //   const { data, error } = await supabase.auth.signInWithPassword({
+  //     email,
+  //     password,
+  //   });
 
-  const handleSubmit = (e) => {
+  //   if (error) {
+  //     console.error('Error logging in:', error.message);
+  //     return null;
+  //   }
+
+  //   console.log('User logged in:', data.user);
+  //   return data.user;
+  // }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
+    const { email, password } = formData;
+    // async function signInWithEmail(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error("Error logging in:", error.message);
+      return null;
+    }
+
+    console.log("User logged in:", data.user);
+    // return data.user;
+    // }
     setIsAuthenticated(true); // Update authentication status
     navigate("/admin"); // Redirect to the dashboard
     // Handle login logic here
