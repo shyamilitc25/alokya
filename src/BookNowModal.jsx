@@ -68,9 +68,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
     const { name, contact, email, date } = formData;
-    console.log({ formData });
 
     try {
       const { data, error } = await supabase

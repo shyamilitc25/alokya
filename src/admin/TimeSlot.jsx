@@ -11,23 +11,69 @@ const TimeSlot = () => {
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-  // Fetch time slots for the selected date
+  const [operation, setOperation] = useState("create");
   useEffect(() => {
     const fetchTimeSlots = async () => {
       const formattedDate = selectedDate.toISOString().split("T")[0];
-      const { data, error } = await supabase.from("slots").select("*");
-      // .eq("date", formattedDate);
 
-      if (error) {
-        console.error("Error fetching time slots:", error.message);
-      } else {
-        setTimeSlots(data);
+      try {
+        const { data, error } = await supabase
+          .from("slots")
+          .select(
+            `
+          id,
+          slots,
+          time_slots(
+            id,
+            status,
+            date,
+            time_slot
+          )
+        `
+          )
+          .eq("time_slots.date", formattedDate); // Filter by the selected date
+
+        if (error) {
+          console.error("Error fetching time slots:", error.message);
+        } else {
+          const formattedData = data.map((slot) => {
+            // Prepare the formatted data
+            const formattedSlot = {
+              id: slot.id,
+              name: slot.slots,
+              timeSlots: slot.time_slots.map((timeSlot) => ({
+                id: timeSlot.id, // This is the `time_slot.id`
+                time: timeSlot.time_slot,
+                status: timeSlot.status, // true/false
+              })),
+            };
+
+            // Add timeSlot.id to selectedTimeSlots if timeSlots has data
+            slot.time_slots.forEach((timeSlot) => {
+              if (Object.keys(timeSlot).length !== 0) {
+                setOperation("update");
+              }
+              setSelectedTimeSlots((prev) =>
+                prev.includes(timeSlot.time_slot)
+                  ? prev
+                  : [...prev, timeSlot.time_slot]
+              );
+            });
+
+            return formattedSlot;
+          });
+
+          setTimeSlots(formattedData);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
       }
     };
 
     fetchTimeSlots();
   }, [selectedDate]);
-  console.log({ timeSlots });
+
+  console.log({ operation });
   // Toggle selection of time slots
   const handleTimeSlotSelection = (time_slot) => {
     setSelectedTimeSlots(
@@ -37,21 +83,33 @@ const TimeSlot = () => {
           : [...prev, time_slot] // Add to selection
     );
   };
-  // Mark selected slots as unavailable
-  const markSlotsUnavailable = async () => {
+
+  const markSlotsUnavailable = async (e) => {
     const formattedDate = selectedDate.toISOString().split("T")[0];
-
-    for (let time_slot of selectedTimeSlots) {
-      const { data, error } = await supabase
-        .from("time_slots")
-        .upsert({ date: formattedDate, time_slot, status: false }); // Mark as unavailable
-
-      if (error) {
-        console.error(`Error updating slot ${time_slot}:`, error.message);
+    const timeSlotsToInsert = selectedTimeSlots.map((time_slot) => ({
+      date: formattedDate,
+      status: false,
+      time_slot: time_slot,
+    }));
+    try {
+      if (operation === "create") {
+        const { data, error } = await supabase
+          .from("time_slots") // Replace with your table name
+          .insert(timeSlotsToInsert);
+        if (error) {
+          console.error("Error inserting data:", error.message);
+          alert("Failed to mark unavailability. Please try again.");
+        } else {
+          console.log("Data inserted successfully:", data);
+          alert("Maeked unavailability successfully!");
+        }
+      } else {
       }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred. Please try again.");
     }
 
-    // Refresh time slots after update
     setSelectedTimeSlots([]);
     const { data, error } = await supabase
       .from("time_slots")
@@ -106,37 +164,17 @@ const TimeSlot = () => {
                   onClick={() => handleTimeSlotSelection(slot.id)}
                 >
                   <div className="card-body text-center">
-                    <h5 className="card-title">{slot.slots}</h5>
+                    <h5 className="card-title">{slot.name}</h5>
                   </div>
                 </label>
               </div>
             ))}
           </div>
-          {/* {timeSlots.map((slot) => (
-            <div className="col-md-2 mb-4" key={slot.time_slot}>
-              <label
-                className={`card time_card h-100 border-light shadow-sm ${
-                  selectedTimeSlots.includes(slot.time_slot)
-                    ? "selected-card"
-                    : ""
-                }`}
-                onClick={() => handleTimeSlotSelection(slot.time_slot)}
-              >
-                <div
-                  className={`card-body text-center ${
-                    !slot.status ? "unavailable-slot" : ""
-                  }`}
-                >
-                  <h5 className="card-title">{slot.time_slot}</h5>
-                </div>
-              </label>
-            </div>
-          ))} */}
         </div>
 
         <button
           className="btn btn-danger mt-4"
-          onClick={markSlotsUnavailable}
+          onClick={(e) => markSlotsUnavailable(e)}
           disabled={selectedTimeSlots.length === 0}
         >
           Mark as Unavailable
