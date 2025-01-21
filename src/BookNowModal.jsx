@@ -4,7 +4,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSupabase } from "./SupabaseContext";
 const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
+  console.log({ massageId });
   const [timeSlots, setTimeSlots] = useState([]);
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const supabase = useSupabase();
   const [formData, setFormData] = useState({
     name: "",
@@ -16,17 +19,62 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
-      const { data, error } = await supabase.from("slots").select("*");
+      const formattedDate = selectedDate.toISOString().split("T")[0];
 
-      if (error) {
-        console.error("Error fetching time slots:", error.message);
-      } else {
-        setTimeSlots(data);
+      try {
+        const { data, error } = await supabase
+          .from("slots")
+          .select(
+            `
+          id,
+          slots,
+          time_slots(
+            id,
+            status,
+            date,
+            time_slot
+          )
+        `
+          )
+          .eq("time_slots.date", formattedDate); // Filter by the selected date
+
+        if (error) {
+          console.error("Error fetching time slots:", error.message);
+        } else {
+          const formattedData = data.map((slot) => {
+            // Prepare the formatted data
+            const formattedSlot = {
+              id: slot.id,
+              name: slot.slots,
+              timeSlots: slot.time_slots.map((timeSlot) => ({
+                id: timeSlot.id, // This is the `time_slot.id`
+                time: timeSlot.time_slot,
+                status: timeSlot.status, // true/false
+              })),
+            };
+
+            // Add timeSlot.id to selectedTimeSlots if timeSlots has data
+            slot.time_slots.forEach((timeSlot) => {
+              setSelectedTimeSlots((prev) =>
+                prev.includes(timeSlot.time_slot)
+                  ? prev
+                  : [...prev, timeSlot.time_slot]
+              );
+            });
+
+            return formattedSlot;
+          });
+
+          setTimeSlots(formattedData);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
       }
     };
 
     fetchTimeSlots();
-  }, [massageId]);
+  }, [selectedDate, massageId]);
+
   console.log({ timeSlots });
 
   const handleInputChange = (e) => {
@@ -64,6 +112,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
   const handleDateChange = (date) => {
     setFormData({ ...formData, date });
+    setSelectedDate(date);
   };
 
   const handleSubmit = async (e) => {
@@ -79,7 +128,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             client_mob: contact,
             client_email: email,
             booking_date: date.toISOString(), // Convert date to ISO string
-            // time: time,
+            booking_time: selectedTimeSlot,
             massage_id: massageId,
           },
         ]);
@@ -102,6 +151,14 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
       console.error("Unexpected error:", err);
       alert("An unexpected error occurred. Please try again.");
     }
+    setFormData({
+      name: "",
+      contact: "",
+      email: "",
+      date: new Date(),
+      time: "",
+    });
+    setTimeSlots([]);
     closeModal();
   };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -197,16 +254,46 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
               <label className="form-label" htmlFor="datePicker">
                 Select a slot
               </label>
+              {/* {timeSlots.map((slot) => (
+              <div className="col-md-2 mb-4">
+                <label
+                  className={`card time_card h-100 border-light shadow-sm ${
+                    selectedTimeSlots.includes(slot.id) ? "selected-card" : ""
+                  }`}
+                  onClick={() => handleTimeSlotSelection(slot.id)}
+                >
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{slot.name}</h5>
+                  </div>
+                </label>
+              </div>
+            ))} */}
               {timeSlots.map((slot) => (
+                // <div className="col-md-2 mb-4">
+                //   <label
+                //     className={`card time_card h-100 border-light shadow-sm ${
+                //       selectedTimeSlot === slot?.id ? "selected-card" : ""
+                //     }`}
+                //     onClick={() => handleTimeSlotChange(slot?.id)}
+                //   >
+                //     <div className="card-body text-center">
+                //       <h5 className="card-title">{slot?.name}</h5>
+                //     </div>
+                //   </label>
+                // </div>
                 <div className="col-md-2 mb-4">
                   <label
                     className={`card time_card h-100 border-light shadow-sm ${
                       selectedTimeSlot === slot?.id ? "selected-card" : ""
+                    } ${
+                      slot?.timeSlots[0]?.status === false
+                        ? "disabled-card"
+                        : ""
                     }`}
                     onClick={() => handleTimeSlotChange(slot?.id)}
                   >
                     <div className="card-body text-center">
-                      <h5 className="card-title">{slot?.slots}</h5>
+                      <h5 className="card-title">{slot?.name}</h5>
                     </div>
                   </label>
                 </div>
@@ -220,7 +307,17 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
               <button
                 type="button"
                 className="btn btn-secondary ms-2"
-                onClick={closeModal}
+                onClick={() => {
+                  setFormData({
+                    name: "",
+                    contact: "",
+                    email: "",
+                    date: new Date(),
+                    time: "",
+                  });
+                  setTimeSlots([]);
+                  closeModal();
+                }}
               >
                 Close
               </button>

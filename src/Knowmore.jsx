@@ -2,6 +2,7 @@ import Footer from "./footer";
 import Header from "./header";
 import Consultation from "./assets/consultation_with_specialist.jpg";
 import Logo from "./assets/logo.png";
+import Gallery from "./Gallery";
 const KnowMore = () => {
   return (
     <>
@@ -49,7 +50,7 @@ const KnowMore = () => {
           {" "}
           <div className="container">
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
-              Ayurveda-Beratung mit Akhil Sugathan Amrutha
+              AYURVEDA-BERATUNG MIT AKHIL SUGATHAN AMRUTHA
             </h2>
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
@@ -83,6 +84,19 @@ const KnowMore = () => {
                     bestimmen. Anschließend wird er spezifische Änderungen
                     empfehlen, die Sie umsetzen können, einschließlich
                     Ernährungsänderungen, Yogaübungen und Pranayama
+                    <br />
+                    <br />
+                    {/* <b> */}
+                    <b style={{ fontWeight: "bold" }}>
+                      {" "}
+                      (* Bitte beachten Sie, dass diese Konsultation keinen Arzt
+                      oder Heilpraktiker ersetzt.)
+                    </b>
+                    <br />
+                    <br />
+                    Bitte schreiben Sie uns oder rufen Sie uns an, um einen
+                    Termin zu vereinbaren
+                    {/* </b> */}
                   </p>
                 </div>
                 {/* <p className="lead">
@@ -107,116 +121,84 @@ const KnowMore = () => {
               <div className="divider-custom-line"></div>
             </div>
             <div className="row">
-              <div class="col-md-6 col-lg-6 mb-5 d-flex align-items-stretch">
-                <div className="card mx-auto" style={{ width: "100%" }}>
+              <div class="col-md-12 col-lg-12 mb-5 d-flex align-items-stretch">
+                <div
+                  className="card mx-auto"
+                  style={{ width: "100%", border: "0px white" }}
+                >
                   <div className="card-body text-center">
-                    <h5 className="card-title">
-                      Abyanga(Ayurveda-Ganzkörpermassage)
-                    </h5>
+                    <h5 className="card-title">Abyanga (Ganzkörpermassage)</h5>
                     <p className="card-text">
-                      Abhyanga ist eine erstaunliche, alte ayurvedische Praxis.
-                      Dabei handelt es sich um eine wunderbare Form der
-                      Selbstpflege, bei der eine Ganzkörpermassage mit warmen
-                      Kräuterölen durchgeführt wird. Diese zutiefst
-                      therapeutische Technik ist genau das Richtige, um Ihre
-                      Haut zu nähren und Ihr allgemeines Wohlbefinden zu
-                      fördern. Dabei werden die Doshas des Körpers - Vata, Pitta
-                      und Kapha - ausgeglichen. Die Massage wird in einer
-                      ruhigen und gelassenen Umgebung durchgeführt, damit die
-                      Öle tief in das Gewebe eindringen und die Durchblutung
-                      fördern, die Gesundheit der Gelenke verbessern und
-                      Giftstoffe ausscheiden können. Abhyanga kann Stress
-                      abbauen, die geistige Klarheit verbessern und einen
-                      erholsamen Schlaf fördern.
+                      Abyanga ist die ayurvedische Ganzkörpermassage. Während
+                      der 40-minütigen Abyanga konzentriert sich der Therapeut
+                      auf lange, rhythmische Streichungen und stimuliert
+                      gleichzeitig Ihre Marmapunkte (Marmapunkte sind spezielle
+                      Punkte in Ihrem Körper, die, wenn sie stimuliert werden,
+                      zur Entspannung Ihrer Doshas führen können). Regelmäßiges
+                      Abyanga hilft, Ihre Vata-Bewegungen zu regulieren und den
+                      Schlaf zu verbessern.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="col-md-6 col-lg-6 mb-5 d-flex align-items-stretch">
-                <div className="card mx-auto" style={{ width: "100%" }}>
+              <div className="col-md-12 col-lg-12 mb-5 d-flex align-items-stretch">
+                <div
+                  className="card mx-auto"
+                  style={{ width: "100%", border: "0px white" }}
+                >
                   <div className="card-body text-center">
-                    <h5 className="card-title">
-                      Pada abyanga (Ayurveda-Fußmassage)
-                    </h5>
+                    <h5 className="card-title">Padaabyanga(Fußmassage)</h5>
                     <p className="card-text">
-                      Haben Sie schon einmal eine Ayurveda-Fußmassage
-                      ausprobiert? Es ist eine fantastische, tief entspannende
-                      Therapie, die auf dem alten indischen System der
-                      ganzheitlichen Medizin basiert. Sie wird Padabhyanga
-                      genannt und ist eine wahre Wohltat für die Füße! Diese
-                      wunderbare Praxis konzentriert sich auf die Füße, die im
-                      Ayurveda als Spiegelbild der allgemeinen Gesundheit und
-                      des Wohlbefindens des Körpers betrachtet werden. Die
-                      rhythmischen und sanften Ausstreichungen sind genau das
-                      Richtige, um Ihre Muskeln zu entspannen, und sie
-                      stimulieren auch die vitalen Energiepunkte, was eine
-                      bessere Durchblutung und Entgiftung fördert. Wenn Sie
-                      Padabhyanga regelmäßig praktizieren, werden Sie
-                      feststellen, dass es Ihre Schlafqualität verbessert,
-                      Stress abbaut und Ihre Sehkraft durch die Harmonisierung
-                      von Körper und Geist verbessert. Dieser ganzheitliche
-                      Ansatz für das Wohlbefinden betont die Vernetzung der
-                      Körpersysteme und die Bedeutung der Erhaltung des
-                      Gleichgewichts für eine optimale Gesundheit.
+                      Die ayurvedische Fußmassage ist als Pada Abhyanga bekannt.
+                      Der Therapeut beginnt mit Ihrem rechten Fuß, führt
+                      entspannende kreisende Bewegungen aus und stimuliert die
+                      Marmapunkte. Das Gleiche wird dann mit dem linken Fuß
+                      gemacht. Ayurveda betont die Bedeutung des Einölens der
+                      Füße, das hilft, Stress zu regulieren und guten Schlaf zu
+                      fördern.
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6 mb-5 d-flex align-items-stretch">
-                <div className="card mx-auto" style={{ width: "100%" }}>
+              <div className="col-md-12 col-lg-12 mb-5 d-flex align-items-stretch">
+                <div
+                  className="card mx-auto"
+                  style={{ width: "100%", border: "0px white" }}
+                >
                   <div className="card-body text-center">
                     <h5 className="card-title">
-                      Mugha abyanga (Ayurveda-Gesichtsmassage)
+                      Mukhaabyanga(Gesichtsmassage)
                     </h5>
                     <p className="card-text">
-                      Die Ayurveda-Gesichtsmassage ist eine unglaubliche, uralte
-                      Praxis, deren Wurzeln in den ganzheitlichen
-                      Heiltraditionen Indiens liegen. Sie wurde entwickelt, um
-                      die Haut zu verjüngen und das allgemeine Wohlbefinden zu
-                      fördern, und sie ist absolut erstaunlich! Diese Praxis ist
-                      eine wahre Freude! Mit warmen Kräuterölen, die auf die
-                      individuelle Dosha-Konstitution abgestimmt sind, wird das
-                      Gesicht sanft massiert, um den Kreislauf anzuregen und die
-                      Lymphdrainage zu fördern. Die rhythmischen, beruhigenden
-                      Bewegungen sind einfach göttlich! Sie helfen,
-                      Verspannungen zu lösen, Fältchen zu reduzieren und den
-                      Hauttonus zu verbessern, während die aromatischen Öle die
-                      Haut nähren und mit Feuchtigkeit versorgen.
+                      Mugha Abyanga ist eine ayurvedische Gesichtsmassage, bei
+                      der der Therapeut mit sanften Streichungen
+                      Muskelverspannungen löst und die Entgiftung der Haut
+                      fördert.
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6 mb-5 d-flex align-items-stretch">
-                <div className="card mx-auto" style={{ width: "100%" }}>
+              <div className="col-md-12 col-lg-12 mb-5 d-flex align-items-stretch">
+                <div
+                  className="card mx-auto"
+                  style={{ width: "100%", border: "0px white" }}
+                >
                   <div className="card-body text-center">
-                    <h5 className="card-title">
-                      Shiroabyanga(Ayurveda-Kopfmassage)
-                    </h5>
+                    <h5 className="card-title">Shiroabyanga(Kopf Massage)</h5>
                     <p className="card-text">
-                      Kopfmassagen mit Kräuteröl sind die beste Art, sich zu
-                      entspannen und besser zu fühlen. Sie sind ein
-                      ganzheitlicher Ansatz für Entspannung und Wellness. Mit
-                      Ayurveda-Kräutern versetzte Kräuteröle verbessern das
-                      Erlebnis und bieten zusätzliche Vorteile für Kopfhaut und
-                      Haar. Diese Öle sind für ihre beruhigenden Eigenschaften
-                      bekannt. Sie fördern körperliche Entspannung, geistige
-                      Klarheit und Stressabbau. Eine Kopfmassage verbessert die
-                      Blutzirkulation, stimuliert die Haarfollikel und
-                      unterstützt ein gesundes Haarwachstum. Das Aroma der
-                      Kräuteröle trägt zu einem meditativen Erlebnis bei und
-                      macht die Kopfmassage zu einem verjüngenden Ritual, das
-                      Körper und Geist gleichermaßen nährt. Ganz gleich, ob Sie
-                      nach Linderung von Spannungskopfschmerzen suchen oder sich
-                      einfach nur einen Moment der Ruhe gönnen möchten, eine
-                      Kopfmassage mit Kräuteröl ist eine zutiefst befriedigende
-                      Praxis der Selbstfürsorge.
+                      Bei der Shiroabhyanga-Massage wird Öl auf Kopf und Nacken
+                      aufgetragen. Die Massage beginnt mit sanften Streichungen.
+                      Die Shiroabhyanga hilft, Stress abzubauen und die
+                      Blutzirkulation zu verbessern. Außerdem hilft sie Ihnen,
+                      besser zu schlafen.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <Gallery />
         </section>
         <Footer />
       </body>

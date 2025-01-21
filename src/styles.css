@@ -11122,5 +11122,17 @@ html {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.gallery_img{
+  height: 400px;
+  object-fit: cover;
+}
+.disabled-card {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #ccc; /* Lighter text color */
+  user-select: none; /* Prevent text selection */
+  pointer-events: none; /* Disable interactions (clicks, hover, etc.) */
+  opacity: 0.5;
+}
+
 
 

@@ -17,7 +17,8 @@ const Appoinments = () => {
     client_email, 
     booking_date, 
     client_mob, 
-    massages(id, massage_name)
+    massages(massage_name),
+    slots(id, slots)
   `);
 
       if (error) {
@@ -43,21 +44,20 @@ const Appoinments = () => {
             <th>Date</th>
             <th>Time</th>
             <th>Contact Number</th>
-            <th>Action</th>
+            <th>Massage</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
+          {data.map((user, i) => (
+            <tr key={user?.id}>
+              {console.log({ user })}
+              <td>{i + 1}</td>
               <td>{user.client_name}</td>
               <td>{user.client_email}</td>
               <td>{user.booking_date}</td>
-              <td>{"Time to be implemented"}</td>
+              <td>{user?.slots?.slots}</td>
               <td>{user.client_mob}</td>
-              <td>
-                <Button>Approve</Button>
-              </td>
+              <td>{user.massages?.massage_name}</td>
             </tr>
           ))}
         </tbody>
