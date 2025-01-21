@@ -50,7 +50,7 @@ const Appoinments = () => {
         <tbody>
           {data.map((user, i) => (
             <tr key={user?.id}>
-              {console.log({ user })}
+              {/* {console.log({ user })} */}
               <td>{i + 1}</td>
               <td>{user.client_name}</td>
               <td>{user.client_email}</td>
