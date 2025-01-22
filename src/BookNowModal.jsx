@@ -80,27 +80,27 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "contact") {
-      if (!value.startsWith("+49") && !value.startsWith("0")) {
-        alert("Please enter a valid contact number.");
-        return;
-      }
+    // if (name === "contact") {
+    //   if (!value.startsWith("+49") && !value.startsWith("0")) {
+    //     alert("Please enter a valid contact number.");
+    //     return;
+    //   }
 
-      const sanitizedValue = value.replace(/(?!^\+)[^\d]/g, "");
-      if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
-        alert("Please enter a valid contact number.");
-        return;
-      }
-    }
+    //   const sanitizedValue = value.replace(/(?!^\+)[^\d]/g, "");
+    //   if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
+    //     alert("Please enter a valid contact number.");
+    //     return;
+    //   }
+    // }
 
-    if (name === "email") {
-      // Email regex validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(value)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
-    }
+    // if (name === "email") {
+    //   // Email regex validation
+    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   if (!emailRegex.test(value)) {
+    //     alert("Please enter a valid email address.");
+    //     return;
+    //   }
+    // }
 
     setFormData((prevData) => ({
       ...prevData,
@@ -118,6 +118,28 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, contact, email, date } = formData;
+
+    if (!contact.startsWith("+49") && !contact.startsWith("0")) {
+      alert("Please enter a valid contact number.");
+      return;
+    }
+
+    const sanitizedValue = contact.replace(/(?!^\+)[^\d]/g, "");
+    if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
+      alert("Please enter a valid contact number.");
+      return;
+    }
+
+    // Email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (selectedTimeSlot === "") {
+      alert("Please select a slot");
+      return;
+    }
 
     try {
       const { data, error } = await supabase
