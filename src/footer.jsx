@@ -6,50 +6,33 @@ const Footer = () => {
           <div className="row">
             {/* <!-- Footer Location--> */}
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h4 className="text-uppercase mb-4">Location</h4>
+              <h4 className="text-uppercase mb-4">Sie finden uns in der</h4>
               <p className="lead mb-0">
-                0160 5607278
+                Weststraße 37
                 <br />
-                Weststr 3757392
-                <br />
-                Schmallenberg
+                57392 Schmallenberg
                 {/* Clark, MO 65243 */}
               </p>
             </div>
-            {/* <!-- Footer Social Icons--> */}
-            {/* <div className="col-lg-4 mb-5 mb-lg-0">
-              <h4 className="text-uppercase mb-4">Around the Web</h4>
-              <a className="btn btn-outline-light btn-social mx-1" href="#!">
-                <i className="fab fa-fw fa-facebook-f"></i>
-              </a>
-              <a className="btn btn-outline-light btn-social mx-1" href="#!">
-                <i className="fab fa-fw fa-twitter"></i>
-              </a>
-              <a className="btn btn-outline-light btn-social mx-1" href="#!">
-                <i className="fab fa-fw fa-linkedin-in"></i>
-              </a>
-              <a className="btn btn-outline-light btn-social mx-1" href="#!">
-                <i className="fab fa-fw fa-dribbble"></i>
-              </a>
-            </div> */}
-            {/* <!-- Footer About Text--> */}
+
             <div className="col-lg-4">
-              <h4 className="text-uppercase mb-4">Contact Us</h4>
+              <h4 className="text-uppercase mb-4">Kontakt</h4>
               <p className="lead mb-0">
-                Email:info@aleykaayurveda.de
+                Email: info@aleykaayurveda.de
                 <br />
-                Kontaktnummer:+49 1605607278
+                Kontaktnummer: +49 1605607278
                 {/* <a href="http://startbootstrap.com">Start Bootstrap</a>. */}
               </p>
             </div>
             <div className="col-lg-4">
-              <h4 className="text-uppercase mb-4">Timing</h4>
+              <h4 className="text-uppercase mb-4">Öffnungszeiten</h4>
               <p className="lead mb-0">
-                öffnungszeiten
-                <br />
+                dienstags bis samstags von 9.00 bis 19.00 Uhr Sonntag und Montag
+                geschlossen
+                {/* <br />
                 dienstags bis samstags von 9.00 bis 19.00 Uhr
                 <br />
-                Sonntag und Montag geschlossen
+                Sonntag und Montag geschlossen */}
                 {/* <a href="http://startbootstrap.com">Start Bootstrap</a>. */}
               </p>
             </div>

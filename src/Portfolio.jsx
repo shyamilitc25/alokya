@@ -85,6 +85,20 @@ const PortFolio = () => {
               </div>
               <div className="divider-custom-line"></div>
             </div>
+            <p className="lead">
+              Sie können Ihre Massage online buchen / Schreiben Sie uns eine
+              E-Mail oder rufen Sie uns an
+              <br />
+              <br />
+              Wir bieten 4 Massagepakete an, um Ihnen eine bessere Entspannung
+              zu ermöglichen.
+              <br />
+              <br />
+              (individuelle Vorlieben können direkt mit dem Therapeuten
+              besprochen werden und er kann Ihr Paket entsprechend planen)
+              <br />
+              <br />
+            </p>
             <div className="row justify-content-center">
               {massages?.map((massage) => (
                 <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
@@ -96,9 +110,9 @@ const PortFolio = () => {
                     />
                     <div className="card-body text-center d-flex flex-column">
                       <h5 className="card-title">{massage?.massage_name}</h5>
-                      <p className="card-text">
+                      {/* <p className="card-text">
                         {massage?.massage_desc} - €{massage?.price}
-                      </p>
+                      </p> */}
                       <button
                         className="btn btn-primary mt-auto"
                         data-bs-toggle="modal"

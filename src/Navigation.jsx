@@ -9,12 +9,12 @@ const Navigation = () => {
       >
         <div className="container">
           <a className="navbar-brand" href="/">
-            <img
+            {/* <img
               className="masthead-logo me-3"
               src={Logo} // Replace `Logo` with your image path or import
               alt="Logo"
               style={{ width: "50px", height: "50px" }} // Adjust size as needed
-            />
+            /> */}
             Aleyka Ayurveda
           </a>
           <button

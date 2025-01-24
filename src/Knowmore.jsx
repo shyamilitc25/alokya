@@ -1,9 +1,30 @@
+import { useEffect, useState } from "react";
 import Footer from "./footer";
 import Header from "./header";
 import Consultation from "./assets/consultation_with_specialist.jpg";
 import Logo from "./assets/logo.png";
-import Gallery from "./Gallery";
+import { useSupabase } from "./SupabaseContext";
+import { useNavigate } from "react-router-dom";
 const KnowMore = () => {
+  const [massages, setMassages] = useState([]);
+  const supabase = useSupabase();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      const { data, error } = await supabase
+        .from("massages")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching time slots:", error.message);
+      } else {
+        setMassages(data);
+      }
+    };
+
+    fetchTimeSlots();
+  }, []);
   return (
     <>
       <body id="page-top">
@@ -111,7 +132,7 @@ const KnowMore = () => {
           <br />
           <div className="container">
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
-              Details
+              Unsere Massagen
             </h2>
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
@@ -135,7 +156,7 @@ const KnowMore = () => {
                       gleichzeitig Ihre Marmapunkte (Marmapunkte sind spezielle
                       Punkte in Ihrem Körper, die, wenn sie stimuliert werden,
                       zur Entspannung Ihrer Doshas führen können). Regelmäßiges
-                      Abyanga hilft, Ihre Vata-Bewegungen zu regulieren und den
+                      Abyanga hilft, Ihre Vata- Bewegungen zu regulieren und den
                       Schlaf zu verbessern.
                     </p>
                   </div>
@@ -196,9 +217,44 @@ const KnowMore = () => {
                   </div>
                 </div>
               </div>
+              <p
+                className="card-text"
+                style={{ fontWeight: "bold", color: "#000", fontSize: "20px" }}
+              >
+                diese Massagen bieten wir als 4 Pakete für Ihre bessere
+                Entspannung.
+              </p>
             </div>
           </div>
-          <Gallery />
+          <div className="row justify-content-center">
+            {massages?.map((massage) => (
+              <div className="col-md-3 col-lg-3 col-ls-12 mb-5">
+                <div className="card h-100 mx-auto" style={{ width: "100%" }}>
+                  <img
+                    className="card-img-top img-fluid"
+                    src={massage?.img_url}
+                    alt="Portfolio Item"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <button
+              className="btn btn-primary mt-auto"
+              style={{ width: "20%" }}
+              onClick={() => navigate("/massage_buchen")}
+            >
+              Book Now
+            </button>
+          </div>
+          {/* <Gallery /> */}
         </section>
         <Footer />
       </body>
