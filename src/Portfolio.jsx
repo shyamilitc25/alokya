@@ -40,7 +40,7 @@ const PortFolio = () => {
         <section className="page-section portfolio" id="portfolio">
           <div className="container">
             <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">
-              Massages
+              Massagen
             </h2>
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
@@ -74,9 +74,26 @@ const PortFolio = () => {
                     />
                     <div className="card-body text-center d-flex flex-column">
                       <h5 className="card-title">{massage?.massage_name}</h5>
-                      <p className="card-text">
+                      <div className="card-desc-div">
+                        <p
+                          className="card-text"
+                          style={{ textAlign: "left" }}
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              massage?.massage_desc?.replace(/\n/g, "<br/>") ||
+                              "No description available",
+                          }}
+                        />
+                      </div>
+
+                      <br />
+                      <div className="card-desc-div">
+                        <h5 className="card-title">€{massage?.price}</h5>
+                      </div>
+
+                      {/* <p className="card-text">
                         {massage?.massage_desc} - €{massage?.price}
-                      </p>
+                      </p> */}
                       <button
                         className="btn btn-primary mt-auto"
                         data-bs-toggle="modal"

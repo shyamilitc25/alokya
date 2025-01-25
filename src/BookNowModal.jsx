@@ -120,24 +120,24 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
     const { name, contact, email, date } = formData;
 
     if (!contact.startsWith("+49") && !contact.startsWith("0")) {
-      alert("Please enter a valid contact number.");
+      alert("Bitte geben Sie eine gültige Kontaktnummer ein");
       return;
     }
 
     const sanitizedValue = contact.replace(/(?!^\+)[^\d]/g, "");
     if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
-      alert("Please enter a valid contact number.");
+      alert("Bitte geben Sie eine gültige Kontaktnummer ein");
       return;
     }
 
     // Email regex validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address.");
+      alert("Bitte geben Sie eine gültige E-Mail Adresse ein");
       return;
     }
     if (selectedTimeSlot === "") {
-      alert("Please select a slot");
+      alert("Eine Uhrzeit auswählen");
       return;
     }
 
@@ -157,10 +157,12 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
       if (error) {
         console.error("Error inserting data:", error.message);
-        alert("Failed to schedule appointment. Please try again.");
+        alert(
+          "Terminvereinbarung fehlgeschlagen. Bitte versuchen Sie es erneut."
+        );
       } else {
         console.log("Data inserted successfully:", data);
-        alert("Appointment scheduled successfully!");
+        alert("Termin erfolgreich vereinbart!");
         setFormData({
           name: "",
           contact: "",
@@ -219,7 +221,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             },
           }}
         >
-          <h2 className="text-center">Schedule Appointment</h2>
+          <h2 className="text-center">Termin vereinbaren</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Name</label>
@@ -234,7 +236,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Contact Number</label>
+              <label className="form-label">Kontakt Nummer</label>
               <input
                 type="tel"
                 className="form-control"
@@ -246,7 +248,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Email</label>
+              <label className="form-label">E-Mail Adresse</label>
               <input
                 type="email"
                 className="form-control"
@@ -259,7 +261,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
             <div className="mb-3">
               <label className="form-label" htmlFor="datePicker">
-                Date
+                Datum
               </label>
               <div>
                 <DatePicker
@@ -274,7 +276,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             </div>
             <div className="row justify-content-center">
               <label className="form-label" htmlFor="datePicker">
-                Select a slot
+                Eine Uhrzeit auswählen
               </label>
               {/* {timeSlots.map((slot) => (
               <div className="col-md-2 mb-4">
@@ -324,7 +326,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
             <div className="text-center">
               <button type="submit" className="btn btn-success">
-                Submit
+                Einreichen
               </button>
               <button
                 type="button"
@@ -341,7 +343,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
                   closeModal();
                 }}
               >
-                Close
+                Schließen
               </button>
             </div>
           </form>

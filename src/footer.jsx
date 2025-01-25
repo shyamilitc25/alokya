@@ -15,7 +15,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="col-lg-4">
+            <div className="col-lg-4 mb-5 mb-lg-0">
               <h4 className="text-uppercase mb-4">Kontakt</h4>
               <p className="lead mb-0">
                 Email: info@aleykaayurveda.de
@@ -29,11 +29,6 @@ const Footer = () => {
               <p className="lead mb-0">
                 dienstags bis samstags von 9.00 bis 19.00 Uhr Sonntag und Montag
                 geschlossen
-                {/* <br />
-                dienstags bis samstags von 9.00 bis 19.00 Uhr
-                <br />
-                Sonntag und Montag geschlossen */}
-                {/* <a href="http://startbootstrap.com">Start Bootstrap</a>. */}
               </p>
             </div>
           </div>
