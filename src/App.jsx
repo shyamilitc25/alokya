@@ -3,6 +3,7 @@ import Footer from "./footer";
 import Header from "./header";
 import Navigation from "./Navigation";
 import Gallery from "./Gallery";
+
 function App() {
   return (
     <>

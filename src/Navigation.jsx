@@ -1,4 +1,3 @@
-import Logo from "./assets/logo.png";
 const Navigation = () => {
   return (
     <>
@@ -31,17 +30,17 @@ const Navigation = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item mx-0 mx-lg-1">
+              {/* <li className="nav-item mx-0 mx-lg-1">
                 <a className="nav-link py-3 px-0 px-lg-3 rounded" href="#about">
                   About
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item mx-0 mx-lg-1">
                 <a
                   className="nav-link py-3 px-0 px-lg-3 rounded"
-                  href="/massage_buchen"
+                  href="/unsere_massagen"
                 >
-                  Massagen
+                  Unsere Massagen
                 </a>
               </li>
 
@@ -56,9 +55,17 @@ const Navigation = () => {
               <li className="nav-item mx-0 mx-lg-1">
                 <a
                   className="nav-link py-3 px-0 px-lg-3 rounded"
-                  href="/knowmore"
+                  href="/ayurveda_beratung"
                 >
-                  Know More
+                  Ayurveda Beratung
+                </a>
+              </li>
+              <li className="nav-item mx-0 mx-lg-1">
+                <a
+                  className="nav-link py-3 px-0 px-lg-3 rounded"
+                  href="/massage_buchen"
+                >
+                  Massage Buchen
                 </a>
               </li>
             </ul>

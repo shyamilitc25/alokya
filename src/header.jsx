@@ -8,22 +8,22 @@ function Header() {
             {/* Logo */}
 
             {/* Heading */}
-            <h1 className="masthead-heading text-uppercase mb-0">Aleyka</h1>
+            {/* <h1 className="masthead-heading text-uppercase mb-0">Aleyka</h1> */}
           </div>
 
           {/* <!-- Icon Divider--> */}
-          <div className="divider-custom divider-light">
+          {/* <div className="divider-custom divider-light">
             <div className="divider-custom-line"></div>
             <div className="divider-custom-icon">
               <i className="fas fa-star"></i>
             </div>
             <div className="divider-custom-line"></div>
-          </div>
+          </div> */}
 
           {/* <!-- Subheading --> */}
-          <p className="masthead-subheading font-weight-light mb-0">
+          {/* <p className="masthead-subheading font-weight-light mb-0">
             Ayurveda Studio
-          </p>
+          </p> */}
         </div>
       </header>
 
