@@ -17,16 +17,16 @@ const Navigation = () => {
             Aleyka Ayurveda
           </a>
           <button
-            className="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
+            class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarResponsive"
             aria-controls="navbarResponsive"
-            aria-expanded="false"
+            aria-expanded="true"
             aria-label="Toggle navigation"
           >
-            Menu
-            <i className="fas fa-bars"></i>
+            <i class="fa fa-bars"></i>
+            <span class="d-none d-sm-inline">Menu</span>
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ms-auto">

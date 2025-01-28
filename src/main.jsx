@@ -9,6 +9,7 @@ import PortFolio from "./Portfolio";
 import AdminRoutes from "./admin/AdminRoutes";
 import { SupabaseProvider } from "./SupabaseContext";
 import Massages from "./Massage";
+import "font-awesome/css/font-awesome.min.css";
 
 createRoot(document.getElementById("root")).render(
   <SupabaseProvider>
