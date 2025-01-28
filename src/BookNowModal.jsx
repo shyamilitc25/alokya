@@ -36,7 +36,8 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
           )
         `
           )
-          .eq("time_slots.date", formattedDate); // Filter by the selected date
+          .eq("time_slots.date", formattedDate)
+          .order("slots", { ascending: true }); // Filter by the selected date
 
         if (error) {
           console.error("Error fetching time slots:", error.message);
