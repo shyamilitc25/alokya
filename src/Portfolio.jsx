@@ -45,7 +45,7 @@ const PortFolio = () => {
             <div className="divider-custom">
               <div className="divider-custom-line"></div>
               <div className="divider-custom-icon">
-                <i className="fas fa-star"></i>
+                <i className="fa fa-star"></i>
               </div>
               <div className="divider-custom-line"></div>
             </div>

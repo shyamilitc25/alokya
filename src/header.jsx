@@ -15,7 +15,7 @@ function Header() {
           {/* <div className="divider-custom divider-light">
             <div className="divider-custom-line"></div>
             <div className="divider-custom-icon">
-              <i className="fas fa-star"></i>
+              <i className="fa fa-star"></i>
             </div>
             <div className="divider-custom-line"></div>
           </div> */}
