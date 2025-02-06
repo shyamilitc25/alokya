@@ -165,7 +165,7 @@ const Impressum = () => {
                     57392 Schmallenberg
                     <br />
                     Die für den Kontakt zur Verfügung stehenden Sprachen sind:
-                    Deutsch,
+                    Deutsch,Englisch
                     <br />
                     <br />
                   </p>
