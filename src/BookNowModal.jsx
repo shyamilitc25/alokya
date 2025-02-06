@@ -37,6 +37,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
         `
           )
           .eq("time_slots.date", formattedDate)
+          .eq("is_enabled", true)
           .order("slots", { ascending: true }); // Filter by the selected date
 
         if (error) {
@@ -80,29 +81,6 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    // if (name === "contact") {
-    //   if (!value.startsWith("+49") && !value.startsWith("0")) {
-    //     alert("Please enter a valid contact number.");
-    //     return;
-    //   }
-
-    //   const sanitizedValue = value.replace(/(?!^\+)[^\d]/g, "");
-    //   if (sanitizedValue.length < 3 || sanitizedValue.length > 15) {
-    //     alert("Please enter a valid contact number.");
-    //     return;
-    //   }
-    // }
-
-    // if (name === "email") {
-    //   // Email regex validation
-    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //   if (!emailRegex.test(value)) {
-    //     alert("Please enter a valid email address.");
-    //     return;
-    //   }
-    // }
-
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -162,15 +140,33 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
           "Terminvereinbarung fehlgeschlagen. Bitte versuchen Sie es erneut."
         );
       } else {
-        console.log("Data inserted successfully:", data);
-        alert("Termin erfolgreich vereinbart!");
-        setFormData({
-          name: "",
-          contact: "",
-          email: "",
-          date: new Date(),
-          time: "",
-        });
+        // to disable the selected date ..add it to the time_slot
+
+        const { data: timeSlotData, error: timeSlotError } = await supabase
+          .from("time_slots")
+          .insert([
+            {
+              date: date.toISOString(),
+              status: false,
+              time_slot: selectedTimeSlot,
+            },
+          ]);
+        if (timeSlotError) {
+          console.error("Error inserting time slot:", timeSlotError.message);
+          alert(
+            "Zeitslot konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut."
+          );
+        } else {
+          console.log("Data inserted successfully:", data);
+          alert("Termin erfolgreich vereinbart!");
+          setFormData({
+            name: "",
+            contact: "",
+            email: "",
+            date: new Date(),
+            time: "",
+          });
+        }
       }
     } catch (err) {
       console.error("Unexpected error:", err);
