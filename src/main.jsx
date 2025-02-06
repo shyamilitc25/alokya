@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/ayurveda_beratung" element={<KnowMore />} />
           <Route path="/unsere_massagen" element={<Massages />} />
           <Route path="/datenschutzerklärung" element={<PrivacyPolicy />} />
-          <Route path="/datenschutzerklärung" element={<PrivacyPolicy />} />
+          <Route path="/massage_buchen" element={<PortFolio />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/admin/*" element={<AdminRoutes />} />{" "}
           {/* Use AdminRoutes here */}
