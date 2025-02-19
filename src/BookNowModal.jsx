@@ -3,8 +3,15 @@ import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSupabase } from "./SupabaseContext";
-const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
-  console.log({ massageId });
+import sendBookingEmail from "./mail";
+const BookNowModal = ({
+  modalIsOpen,
+  closeModal,
+  massageId,
+  massageName,
+  massageDur,
+}) => {
+  // console.log({ massageId });
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -77,7 +84,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
     fetchTimeSlots();
   }, [selectedDate, massageId]);
 
-  console.log({ timeSlots });
+  // console.log({ timeSlots });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -157,6 +164,17 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
             "Zeitslot konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut."
           );
         } else {
+          const bookingData = {
+            customerName: name,
+            customerEmail: email,
+            bookingDetails: {
+              date: date.toLocaleDateString("en-GB"),
+              time: selectedTime,
+              massage: massageName,
+              duration: massageDur,
+            },
+          };
+          await sendBookingEmail(bookingData);
           console.log("Data inserted successfully:", data);
           alert("Termin erfolgreich vereinbart!");
           setFormData({
@@ -183,9 +201,12 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
     closeModal();
   };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
-  const handleTimeSlotChange = (timeSlot) => {
+  const handleTimeSlotChange = (timeSlot, name) => {
     setSelectedTimeSlot(timeSlot);
+    console.log({ name });
+    setSelectedTime(name);
   };
 
   return (
@@ -275,33 +296,8 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
               <label className="form-label" htmlFor="datePicker">
                 Eine Uhrzeit auswählen
               </label>
-              {/* {timeSlots.map((slot) => (
-              <div className="col-md-2 mb-4">
-                <label
-                  className={`card time_card h-100 border-light shadow-sm ${
-                    selectedTimeSlots.includes(slot.id) ? "selected-card" : ""
-                  }`}
-                  onClick={() => handleTimeSlotSelection(slot.id)}
-                >
-                  <div className="card-body text-center">
-                    <h5 className="card-title">{slot.name}</h5>
-                  </div>
-                </label>
-              </div>
-            ))} */}
+
               {timeSlots.map((slot) => (
-                // <div className="col-md-2 mb-4">
-                //   <label
-                //     className={`card time_card h-100 border-light shadow-sm ${
-                //       selectedTimeSlot === slot?.id ? "selected-card" : ""
-                //     }`}
-                //     onClick={() => handleTimeSlotChange(slot?.id)}
-                //   >
-                //     <div className="card-body text-center">
-                //       <h5 className="card-title">{slot?.name}</h5>
-                //     </div>
-                //   </label>
-                // </div>
                 <div className="col-md-2 mb-4">
                   <label
                     className={`card time_card h-100 border-light shadow-sm ${
@@ -311,7 +307,7 @@ const BookNowModal = ({ modalIsOpen, closeModal, massageId }) => {
                         ? "disabled-card"
                         : ""
                     }`}
-                    onClick={() => handleTimeSlotChange(slot?.id)}
+                    onClick={() => handleTimeSlotChange(slot?.id, slot?.name)}
                   >
                     <div className="card-body text-center">
                       <h5 className="card-title">{slot?.name}</h5>

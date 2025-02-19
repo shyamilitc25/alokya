@@ -12,9 +12,13 @@ const PortFolio = () => {
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => {
     setSelectedMassageId(null);
+    setSelectedMassageName("");
+    setSelectedMassageDur("");
     setModalIsOpen(false);
   };
   const [selectedMassageId, setSelectedMassageId] = useState(null);
+  const [selectedMassageName, setSelectedMassageName] = useState("");
+  const [selectedMassageDur, setSelectedMassageDur] = useState("");
   useEffect(() => {
     const fetchTimeSlots = async () => {
       const { data, error } = await supabase
@@ -100,6 +104,8 @@ const PortFolio = () => {
                         data-bs-target="#portfolioModal6"
                         onClick={() => {
                           setSelectedMassageId(massage.id);
+                          setSelectedMassageName(massage?.massage_name);
+                          setSelectedMassageDur(massage?.massage_desc);
                           openModal(true);
                         }}
                       >
@@ -120,6 +126,8 @@ const PortFolio = () => {
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
           massageId={selectedMassageId}
+          massageName={selectedMassageName}
+          massageDur={selectedMassageDur}
         />
       </body>
     </>
