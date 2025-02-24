@@ -26,10 +26,10 @@ const BookNowModal = ({
     time: "",
   });
   const durationDetails = [
-    { massageType: "massage1", blockCount: 3 },
-    { massageType: "massage2", blockCount: 4 },
-    { massageType: "massage3", blockCount: 5 },
-    { massageType: "massage4", blockCount: 6 },
+    { massageType: "massage1", blockCount: 2 },
+    { massageType: "massage2", blockCount: 3 },
+    { massageType: "massage3", blockCount: 4 },
+    { massageType: "massage4", blockCount: 5 },
   ];
 
   useEffect(() => {
