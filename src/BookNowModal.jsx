@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSupabase } from "./SupabaseContext";
 import sendBookingEmail from "./mail";
+
 const BookNowModal = ({
   modalIsOpen,
   closeModal,
@@ -13,6 +14,7 @@ const BookNowModal = ({
 }) => {
   // console.log({ massageId });
   const [timeSlots, setTimeSlots] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const supabase = useSupabase();
@@ -23,6 +25,12 @@ const BookNowModal = ({
     date: new Date(),
     time: "",
   });
+  const durationDetails = [
+    { massageType: "massage1", blockCount: 3 },
+    { massageType: "massage2", blockCount: 4 },
+    { massageType: "massage3", blockCount: 5 },
+    { massageType: "massage4", blockCount: 6 },
+  ];
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
@@ -93,9 +101,25 @@ const BookNowModal = ({
       [name]: value,
     }));
   };
-
+  console.log({ timeSlots });
   // setFormData({ ...formData, [name]: value });
+  const getBlockedSlotIds = (selectedTime, count, interval) => {
+    // Convert the selected time to Date object for comparison
+    let selectedIndex = timeSlots.findIndex(
+      (slot) => slot.name === selectedTime
+    );
 
+    if (selectedIndex === -1) {
+      console.error("Selected time not found in timeSlots");
+      return [];
+    }
+
+    // Get the next 'count' slots
+    let blockedSlots = timeSlots.slice(selectedIndex, selectedIndex + count);
+    // console.log({ blockedSlots });
+    // Return only the IDs of those slots
+    return blockedSlots.map((slot) => slot.id);
+  };
   const handleDateChange = (date) => {
     setFormData({ ...formData, date });
     setSelectedDate(date);
@@ -103,6 +127,7 @@ const BookNowModal = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { name, contact, email, date } = formData;
 
     if (!contact.startsWith("+49") && !contact.startsWith("0")) {
@@ -147,17 +172,38 @@ const BookNowModal = ({
           "Terminvereinbarung fehlgeschlagen. Bitte versuchen Sie es erneut."
         );
       } else {
-        // to disable the selected date ..add it to the time_slot
+        let curMassageTYpe = massageName.replace(/\s+/g, "").toLowerCase();
+
+        let durationToblock = durationDetails.filter(
+          (item) => item.massageType === curMassageTYpe
+        )[0].blockCount;
+        let blockTimeSlots = getBlockedSlotIds(
+          selectedTime,
+          durationToblock,
+          30
+        );
+
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const timeSlotsToInsert = blockTimeSlots.map((time_slot) => ({
+          date: formattedDate,
+          status: false,
+          time_slot: time_slot,
+        }));
+        console.log("getBlockedSlotIds", blockTimeSlots, timeSlotsToInsert);
 
         const { data: timeSlotData, error: timeSlotError } = await supabase
-          .from("time_slots")
-          .insert([
-            {
-              date: date.toISOString(),
-              status: false,
-              time_slot: selectedTimeSlot,
-            },
-          ]);
+          .from("time_slots") // Replace with your table name
+          .insert(timeSlotsToInsert, { upsert: false }); // Ensure no
+
+        // const { data: timeSlotData, error: timeSlotError } = await supabase
+        //   .from("time_slots")
+        //   .insert([
+        //     {
+        //       date: date.toISOString(),
+        //       status: false,
+        //       time_slot: selectedTimeSlot,
+        //     },
+        //   ]);
         if (timeSlotError) {
           console.error("Error inserting time slot:", timeSlotError.message);
           alert(
@@ -198,6 +244,7 @@ const BookNowModal = ({
       time: "",
     });
     setTimeSlots([]);
+    setIsLoading(false);
     closeModal();
   };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -205,7 +252,7 @@ const BookNowModal = ({
 
   const handleTimeSlotChange = (timeSlot, name) => {
     setSelectedTimeSlot(timeSlot);
-    console.log({ name });
+
     setSelectedTime(name);
   };
 
@@ -318,9 +365,26 @@ const BookNowModal = ({
             </div>
 
             <div className="text-center">
-              <button type="submit" className="btn btn-success">
+              {isLoading ? (
+                <button class="btn btn-success" type="button" disabled>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Einreichen...
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-success">
+                  Einreichen
+                </button>
+              )}
+              {/* <button type="submit" className="btn btn-success">
+                <div class="spinner-border text-light" role="status">
+                  {/* <span class="visually-hidden">Loading...</span> */}
+              {/* </div>
                 Einreichen
-              </button>
+              </button> */}
               <button
                 type="button"
                 className="btn btn-secondary ms-2"

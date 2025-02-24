@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import Footer from "./footer";
 import Header from "./header";
 import BookNowModal from "./BookNowModal";
-import Logo from "./assets/logo.png";
+
 import { useSupabase } from "./SupabaseContext";
 const PortFolio = () => {
   const [massages, setMassages] = useState([]);
