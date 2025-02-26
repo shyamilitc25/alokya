@@ -213,6 +213,7 @@ const BookNowModal = ({
           const bookingData = {
             customerName: name,
             customerEmail: email,
+            customerPhone: contact,
             bookingDetails: {
               date: date.toLocaleDateString("en-GB"),
               time: selectedTime,
