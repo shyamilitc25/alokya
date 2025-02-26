@@ -249,10 +249,32 @@ const BookNowModal = ({
   };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const isBookingAvailable = (slot, massageType) => {
+    let durationToCheck = durationDetails.filter(
+      (item) => item.massageType === massageType
+    )[0].blockCount;
+    let blockTimeSlots = getBlockedSlotIds(slot, durationToCheck, 30);
+    // console.log({ blockTimeSlots });
 
+    return blockTimeSlots.some((id) =>
+      timeSlots.some((slot) =>
+        slot.timeSlots.some((timeSlot) => timeSlot.time === id)
+      )
+    );
+  };
   const handleTimeSlotChange = (timeSlot, name) => {
+    let curMassageTYpe = massageName.replace(/\s+/g, "").toLowerCase();
+    const isExist = isBookingAvailable(name, curMassageTYpe);
+    if (isExist) {
+      alert(
+        "Die ausgewählte Zeit ist nicht verfügbar. Bitte wählen Sie eine andere Zeit"
+      );
+      return; // Stop execution if the slot is already booked
+    }
+
     setSelectedTimeSlot(timeSlot);
 
+    console.log({ timeSlots });
     setSelectedTime(name);
   };
 
