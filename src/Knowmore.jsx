@@ -81,6 +81,8 @@ const KnowMore = () => {
                     <br />
                     Bitte schreiben Sie uns oder rufen Sie uns an, um einen
                     Termin zu vereinbaren
+                    <br />
+                    <strong style={{ fontWeight: "bold" }}>- €169</strong>
                     {/* </b> */}
                   </p>
                 </div>

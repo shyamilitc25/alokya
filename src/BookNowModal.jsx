@@ -200,7 +200,7 @@ const BookNowModal = ({
         //   .insert([
         //     {
         //       date: date.toISOString(),
-        //       status: false,
+        //       stxfatus: false,
         //       time_slot: selectedTimeSlot,
         //     },
         //   ]);
@@ -268,7 +268,7 @@ const BookNowModal = ({
     const isExist = isBookingAvailable(name, curMassageTYpe);
     if (isExist) {
       alert(
-        "Die ausgewählte Zeit ist nicht verfügbar. Bitte wählen Sie eine andere Zeit"
+        "Die ausgewählte Zeit ist für diese Massage nicht verfügbar. Bitte wählen Sie eine andere Zeit."
       );
       return; // Stop execution if the slot is already booked
     }
